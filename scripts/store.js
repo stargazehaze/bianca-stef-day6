@@ -40,6 +40,13 @@ const store = (function () {
   const findAndDelete = function(id){
     return this.items.filter(id);
   };
+  const toggleCheckedFilter = function(){
+    this.hideCheckedItems = !this.hideCheckedItems;
+  };
+  const setSearchTerm = function(){
+    //unsure out this question 5 bullet 1b
+    return this.searchTerm = val(0);
+  };
     
   return {
     findById,
