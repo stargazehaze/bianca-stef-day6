@@ -1,53 +1,55 @@
-/* global cuid */
+'use strict';
+/* global Item, cuid */
 //eslint-disable-next-line no-unused vars
 const store = (function () {
-   //const foo = 'bar';
+  //const foo = 'bar';
 
-    const items = [
-      { id: cuid(), name: 'apples', checked: false },
-      { id: cuid(), name: 'oranges', checked: false },
-      { id: cuid(), name: 'milk', checked: true },
-      { id: cuid(), name: 'bread', checked: false }
-    ];
-    const hideCheckedItems = false;
-    const searchTerm = '';
-    return {
-        items: items,
-        hideCheckedItems: hideCheckedItems,
-        searchTerm: searchTerm
-    };
-    const findById = function(id){
-        return store.items.find(item => item.id === id);
-    };
-    const addItem = function(name){
-        try {
-            Item.push(this.items);
-        }catch(e){
+  const items = [
+    { id: cuid(), name: 'apples', checked: false },
+    { id: cuid(), name: 'oranges', checked: false },
+    { id: cuid(), name: 'milk', checked: true }];
+  const hideCheckedItems = false;
+  const searchTerm = '';
 
-        }
-    };
-    const findAndToggleChecked = function(id){
-        let item = this.findById(id);
-        item.checked = !item.checked;
-    };
-    const findAndUpdateName = function(id, newName){
-        try {
-            Item.validateName();
-            findById(item);
-        }catch(error){
-            console.log(`Cannot update name: ${error.message}`);
-        }
-    };
-    const findAndDelete = function(id){
-        return this.items.filter(id);
-    };
+  const findById = function(id){
+    return store.items.find(item => item.id === id);
+  };
+  //something funny going on below here
+  const addItem = function(name){
+    try {
+      Item.validateName(name);
+      Item.create(name);
+      this.items.push(name);
+    }catch(e){
+      console.log('This is an error.');
+    }
+  };
+  const findAndToggleChecked = function(id){
+    let item = this.findById(id);
+    item.checked = !item.checked;
+  };
+  const findAndUpdateName = function(id, newName){
+    let item = this.findById(id);
+    try {
+      Item.validateName();
+      findById(item);
+    }catch(error){
+      console.log(`Cannot update name: ${error.message}`);
+    }
+  };
+  const findAndDelete = function(id){
+    return this.items.filter(id);
+  };
     
-    return {
-        findById,
-        addItem,
-        findAndToggleChecked,
-        findAndUpdateName,
-        findAndDelete,
-    };
+  return {
+    findById,
+    addItem,
+    findAndToggleChecked,
+    findAndUpdateName,
+    findAndDelete,
+    items: items,
+    hideCheckedItems: hideCheckedItems,
+    searchTerm: searchTerm
+  };
 
 }() );
