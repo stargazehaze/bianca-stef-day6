@@ -1,7 +1,7 @@
 /* */
 
 const store = (function () {
-    const foo = 'bar';
+   //const foo = 'bar';
     return {
         items: items,
         hideCheckedItems: hideCheckedItems,
