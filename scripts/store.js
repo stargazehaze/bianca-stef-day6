@@ -16,5 +16,38 @@ const store = (function () {
         hideCheckedItems: hideCheckedItems,
         searchTerm: searchTerm
     };
+    const findById = function(id){
+        return store.items.find(item => item.id === id);
+    };
+    const addItem = function(name){
+        try {
+            Item.push(this.items);
+        }catch(e){
+
+        }
+    };
+    const findAndToggleChecked = function(id){
+        let item = this.findById(id);
+        item.checked = !item.checked;
+    };
+    const findAndUpdateName = function(id, newName){
+        try {
+            Item.validateName();
+            findById(item);
+        }catch(error){
+            console.log(`Cannot update name: ${error.message}`);
+        }
+    };
+    const findAndDelete = function(id){
+        return this.items.filter(id);
+    };
+    
+    return {
+        findById,
+        addItem,
+        findAndToggleChecked,
+        findAndUpdateName,
+        findAndDelete,
+    };
 
 }() );
