@@ -18,10 +18,10 @@ const store = (function () {
   const addItem = function(name){
     try {
       Item.validateName(name);
-      Item.create(name);
-      this.items.push(name);
+      const item = Item.create(name);
+      this.items.push(item);
     }catch(e){
-      console.log('This is an error.');
+      console.log(`${e.message}`);
     }
   };
   const findAndToggleChecked = function(id){
@@ -54,9 +54,11 @@ const store = (function () {
     findAndToggleChecked,
     findAndUpdateName,
     findAndDelete,
-    items: items,
-    hideCheckedItems: hideCheckedItems,
-    searchTerm: searchTerm
+    toggleCheckedFilter,
+    setSearchTerm,
+    items,
+    hideCheckedItems,
+    searchTerm,
   };
 
 }() );
